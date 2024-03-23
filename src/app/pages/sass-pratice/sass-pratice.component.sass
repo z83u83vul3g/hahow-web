@@ -1,0 +1,63 @@
+.container
+  width: 100%
+  height: 100%
+  background-color: #222
+  margin: 0
+  display: flex
+  flex-wrap: wrap
+  position: relative
+  .vribbon
+    width: 15%
+    height: 100%
+    position: absolute
+    left: 50%
+    top: 0
+    transform: translateX(-50%)
+  .hribbon
+    width: 100%
+    height: 15%
+    position: absolute
+    left: 0
+    top: 50%
+    transform: translateY(-50%)
+  .vribbon,.hribbon
+    box-shadow: 0px 0px 20px rgba(black, 0.5)
+  .cap
+    height: 15%
+    width: calc(100% + 10px)
+    height: 15%
+    position: absolute
+    left: 0
+    top: 0
+    box-shadow: 0px 0px 20px rgba(black, 0.5)
+    transform: translateX(-5px)
+
+@mixin present($size: 100px, $bodyColor: #ff5151, $ribbonColor: #fff, $rotateDeg: 0deg)
+  width: $size
+  height: $size
+  position: relative
+  box-shadow: 0px 0px 20px rgba(black, 0.5)
+  background-color: $bodyColor
+  transform: rotate($rotateDeg)
+  .vribbon,.hribbon
+    background-color: $ribbonColor
+  .cap
+    background-color: $bodyColor
+
+$colorRed: #f24
+$colorWhite: #fff
+$colorBlue: #3364f7
+$colorYellow: #ffd221
+$colorPurple: #c747ff
+
+$colors: ($colorRed, $colorWhite, $colorBlue, $colorYellow, $colorPurple)
+
+@for $i from 1 through 50
+  $size: random(50)+50
+  $bodyColor: nth($colors, random(5))
+  $ribbonColor: nth($colors, random(5))
+  $rotateDeg: random(20)-10
+  @if ($ribbonColor == $bodyColor)
+    $ribbonColor: nth($colors, random(5))
+  .present#{$i}
+    +present(#{$size}px, $bodyColor, $ribbonColor, #{$rotateDeg}deg)
