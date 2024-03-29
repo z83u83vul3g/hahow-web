@@ -1,0 +1,32 @@
+*
+  border: solid 2px black
+
+@mixin size($w, $h: $w)
+  width: $w
+  height: $h
+
+@mixin flexCenter
+  display: flex
+  justify-content: center
+  align-items: center
+
+@mixin bdrs($w, $h)
+  width: $w
+  height: $h
+  border-radius: calc($h/2)
+
+@mixin hair($w, $h)
+  +bdrs($w, $h)
+
+.scene
+  +size(600px, 500px)
+  +flexCenter
+
+.person
+  .hairs
+    .hair1
+      +hair(150px, 80px)
+    .hair2
+      +hair(150px, 80px)
+    .hair3
+      +hair(150px, 80px)
