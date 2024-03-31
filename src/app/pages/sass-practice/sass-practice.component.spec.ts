@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SassPraticeComponent } from './sass-pratice.component';
+import { SassPracticeComponent } from './sass-practice.component';
 
 describe('SassPraticeComponent', () => {
-  let component: SassPraticeComponent;
-  let fixture: ComponentFixture<SassPraticeComponent>;
+  let component: SassPracticeComponent;
+  let fixture: ComponentFixture<SassPracticeComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [SassPraticeComponent]
+      imports: [SassPracticeComponent]
     })
     .compileComponents();
-    
-    fixture = TestBed.createComponent(SassPraticeComponent);
+
+    fixture = TestBed.createComponent(SassPracticeComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

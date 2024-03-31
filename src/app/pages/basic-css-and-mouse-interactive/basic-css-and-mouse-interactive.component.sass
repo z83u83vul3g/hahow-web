@@ -1,5 +1,13 @@
+$colorBlue: #307be1
+$colorDeepBlue: #2f4a6e
+$colorYellow: #ffc12c
+$colorOrange: #f38a0c
+$colorShadow: rgba(black, 0.1)
+
+$shadowInset: inset -10px -10px 0px $colorShadow
+
 *
-  border: solid 2px black
+  // border: solid 2px black
 
 @mixin size($w, $h: $w)
   width: $w
@@ -10,23 +18,133 @@
   justify-content: center
   align-items: center
 
-@mixin bdrs($w, $h)
+@mixin bdrsRect($w, $h, $bdrs: calc($h/2))
   width: $w
   height: $h
-  border-radius: calc($h/2)
+  border-radius: $bdrs
 
 @mixin hair($w, $h)
-  +bdrs($w, $h)
+  +bdrsRect($w, $h)
+  background-color: white
+  box-shadow: $shadowInset
 
 .scene
   +size(600px, 500px)
   +flexCenter
+  background-color: $colorBlue
+  position: relative
+  .title
+    position: absolute
+    left: 20px
+    top: 20px
+    margin: 0
+    font-size: 50px
+    color: white
+    // 透明度
+    opacity: 0
+    .question
+      font-size: 35px
+      color: $colorYellow
+      margin: 0
+      display: none
 
 .person
+  position: relative
+  .message
+    font-size: 20px
+    font-weight: bold
+    color: white
+    position: absolute
+    left: -200px
+    top: 50px
+    opacity: 0
   .hairs
+    // 設置 position 可讓元素可定位(可排列)
+    position: relative
     .hair1
       +hair(150px, 80px)
+      margin:
+        left: 10px
     .hair2
-      +hair(150px, 80px)
+      +hair(150px, 60px)
+      margin:
+        left: 50px
+        top: -40px
     .hair3
-      +hair(150px, 80px)
+      +hair(150px, 70px)
+      margin:
+        left: 5px
+        top: -45px
+  .body
+    +bdrsRect(210px, 120px, 40px)
+    padding-top: 50px
+    margin-top: -40px
+    background-color: $colorYellow
+    box-shadow: $shadowInset
+    .eyes
+      .eye
+        +bdrsRect(50px, 25px)
+        display: inline-block
+        margin-right: 5px
+        margin-left: 15px
+        background-color: white
+        .eye-ball
+          +bdrsRect(25px, 25px)
+          background-color: $colorDeepBlue
+    .mouth
+      +bdrsRect(70px, 25px)
+      margin:
+        top: 15px
+        left: 70px
+      background-color: $colorOrange
+      .food
+        +bdrsRect(12px, 12px)
+        margin-left: -40px
+        background-color: $colorOrange
+
+.scene
+  .title
+    transition: 0.5s
+.person
+    transition: 0.5s
+    .body
+      // 逗點隔開可以單獨指定某個屬性變化時所需的時間, 第二個數值用來控制發生前的延遲時間
+      transition: 0.5s, background-color 1s 0.5s
+    .message
+      transition-delay: 0.5s
+    *
+      transition: 0.5s
+
+.scene:hover
+  .person
+    margin-top: 50px
+    .body
+      // 負值為內陰影, 正值為外陰影, 逗號隔開代表設定多組
+      box-shadow: $shadowInset, 30px 10px $colorShadow
+    &:hover
+      .message
+        opacity: 1
+      .hairs
+        .hair3
+          margin-left: 0px
+      .body
+        box-shadow: $shadowInset, -30px 10px $colorShadow
+        background-color: $colorOrange
+      transform: translateX(40px)
+      .eyes
+        transform: translateX(30px)
+      .eye-ball
+        transform: translateX(25px)
+      .mouth
+        transform: translateX(20px)
+  .title
+    opacity: 1
+
+.scene:active
+  .title
+    .question
+      display: block
+  .person
+    transform: scale(0.9)
+    .hairs
+      transform: translateY(-50px)

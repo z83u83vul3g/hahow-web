@@ -1,0 +1,55 @@
+.container
+  width: 100vw
+  height: 100vh
+  display: flex
+  background-color: #222
+  justify-content: center
+  align-items: center
+  .rect
+    width: 50%
+    height: 300px
+    position: relative
+    background-color: #fff
+    .ball
+      width: 50px
+      height: 50px
+      background-color: red
+      position: absolute
+      top: 50%
+      transform: translateY(-50%)
+@keyframes ani
+  0%
+    left: 0%
+    background-color: green
+  50%
+    width: 100px
+    height: 100px
+    background-color: blue
+    border-radius: 50%
+  100%
+    left: calc(100% - 50px)
+
+.ball
+  animation-name: ani
+  animation-duration: 1s
+  // 設定延遲2秒執行
+  animation-delay: 2s
+  animation-iteration-count: infinite
+  // 完成一次動畫後, 接著反向播放
+  animation-direction: alternate
+  // 預設填補: 由０%時的 css 代替原始 css
+  animation-fill-mode: both
+
+
+@keyframes rotate
+  0%, 50%, 100%
+    transform: rotate(0deg)
+  25%, 75%
+    transform: rotate(45deg)
+
+.rect
+  animation: rotate 5s infinite // 動畫名, 動畫時間, 延遲播放時間, 播放次數
+  &:hover
+    animation-play-state: paused
+    .ball
+      animation-play-state: paused
